@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import TrainingView from "@/components/matches/training-view";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { colors } from "@/constants/color-config";
-import MatchesHeader from "@/components/matches/matches-header";
 import MatchesTabContent from "@/components/matches/match-content";
 import { ScrollView } from "react-native";
+import Header from "@/components/header";
+import Tabs from "@/components/home/tabs";
 
 export type matchType = {
   id: number;
@@ -88,8 +89,9 @@ const MatchesView = () => {
       style={{ backgroundColor: colors.darkGray }}
     >
       {/* Header */}
-      <MatchesHeader activeTab={activeTab} setActiveTab={setActiveTab} />
 
+      <Header title="My Matches" />
+      <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
       <ScrollView
         contentContainerStyle={{ paddingTop: 20 }}
         showsVerticalScrollIndicator={false}

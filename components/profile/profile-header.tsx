@@ -20,7 +20,7 @@ const ProfileHeader = ({ isLoggedIn = false }: { isLoggedIn: boolean }) => {
       style={{ gap: 16 }}
     >
       <Text className="text-3xl font-bold text-gray-300">My Profile</Text>
-
+{/* 
       <TouchableOpacity
         className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-700/50"
         onPress={isLoggedIn ? handleLogout : handleLogin}
@@ -30,7 +30,7 @@ const ProfileHeader = ({ isLoggedIn = false }: { isLoggedIn: boolean }) => {
         ) : (
           <LogIn color={colors.blue} size={20} />
         )}
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };

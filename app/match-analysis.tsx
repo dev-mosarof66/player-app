@@ -4,12 +4,13 @@ import MatchPerformance from "@/components/match-analysis/match-performance";
 import MatchSummary from "@/components/match-analysis/match-summary";
 import YourHitmap from "@/components/match-analysis/your-hitmap";
 import { colors } from "@/constants/color-config";
-import { MaterialIcons } from "@expo/vector-icons";
+import { useLocalSearchParams } from "expo-router";
 import React from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const MatchAnalysisScreen = () => {
+  const { matchId } = useLocalSearchParams();
   const performanceMetrics = [
     { label: "Distance Covered", value: "10.2 km" },
     { label: "Pass Accuracy", value: "87%", hasProgress: true, progress: 87 },
@@ -32,13 +33,15 @@ const MatchAnalysisScreen = () => {
     { time: "78'", type: "Shot on Target", description: "Close attempt" },
   ];
 
+  const isUpcoming =  true;
+
   return (
     <SafeAreaView
       className="flex-1 bg-darkGray"
       style={{ backgroundColor: colors.darkGray }}
     >
       {/* header  */}
-      <Header />
+      <Header isUpcoming={isUpcoming} />
 
       <ScrollView
         className="flex-1"
@@ -48,10 +51,10 @@ const MatchAnalysisScreen = () => {
         showsVerticalScrollIndicator={false}
       >
         <View style={{ gap: 20 }}>
-          <MatchSummary />
-          <MatchPerformance performanceMetrics={performanceMetrics} />
-          <YourHitmap />
-          <KeyMoments keyMoments={keyMoments} />
+          <MatchSummary isUpcoming={isUpcoming} />
+          <MatchPerformance performanceMetrics={performanceMetrics} isUpcoming={isUpcoming} />
+          <YourHitmap isUpcoming={isUpcoming} />
+          <KeyMoments keyMoments={keyMoments} isUpcoming={isUpcoming} />
         </View>
       </ScrollView>
     </SafeAreaView>

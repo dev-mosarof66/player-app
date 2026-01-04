@@ -1,3 +1,9 @@
+import {
+  scaleFontSize,
+  scaleHeight,
+  scaleSpacing,
+  scaleWidth,
+} from "@/utils/responsive";
 import React from "react";
 import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 
@@ -18,24 +24,30 @@ const tabs = [
     label: "Team",
     value: "team",
   },
-  {
-    label: "Archive",
-    value: "archive",
-  },
 ];
 
-const TasksTab = ({
+const Tabs = ({
   activeTab,
   setActiveTab,
+  handleTab,
 }: {
   activeTab: string;
   setActiveTab: (tab: string) => void;
+  handleTab: (tab: string) => void;
 }) => {
   return (
-    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+    <ScrollView
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{
+        paddingHorizontal: scaleSpacing(10),
+        paddingVertical: scaleSpacing(4),
+        marginBottom: scaleSpacing(10),
+      }}
+    >
       <View
         className="flex-row items-center justify-between"
-        style={{ gap: 8 }}
+        style={{ gap: scaleSpacing(10) }}
       >
         {tabs.map((tab) => {
           const activeBgColor =
@@ -43,13 +55,18 @@ const TasksTab = ({
           return (
             <TouchableOpacity
               key={tab.value}
-              onPress={() => setActiveTab(tab.value)}
-              className={`flex items-center justify-center w-28 h-10 px-4 py-2 rounded-lg border border-gray-700 ${activeBgColor}`}
+              onPress={() => handleTab(tab.value)}
+              className={`flex items-center justify-center rounded-lg border border-gray-700 ${activeBgColor}`}
+              style={{
+                width: scaleWidth(112),
+                height: scaleHeight(35),
+              }}
             >
               <Text
-                className={`text-[16px] font-bold ${
+                className={`font-bold ${
                   activeTab === tab.value ? "text-white" : "text-gray-300"
                 }`}
+                style={{ fontSize: scaleFontSize(14) }}
               >
                 {tab.label}
               </Text>
@@ -61,4 +78,4 @@ const TasksTab = ({
   );
 };
 
-export default TasksTab;
+export default Tabs;

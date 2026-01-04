@@ -4,7 +4,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import Svg, { ClipPath, Defs, Polygon, Rect } from "react-native-svg";
 
-const YourHitmap = () => {
+const YourHitmap = ({ isUpcoming }: { isUpcoming: boolean }) => {
   return (
     <View
       className="p-4 mx-4 rounded-2xl border border-gray-700 bg-gray-800"
@@ -49,48 +49,65 @@ const YourHitmap = () => {
           </View>
 
           {/* active area  */}
-          <View className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
-            <View className="relative w-full h-full rounded-t-full flex items-center justify-center">
-              <Svg
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  position: "absolute",
-                  top: "50%",
-                  left: "50%",
-                  transform: [{ translateY: -65 }, { translateX: -50 }],
-                }}
-                viewBox="0 0 100 100"
-                preserveAspectRatio="none"
-              >
-                <Defs>
-                  <ClipPath id="hitmapPolygonClip">
-                    <Polygon points="0,0 0,61 100,35" />
-                  </ClipPath>
-                </Defs>
-                <Rect
-                  x="0"
-                  y="0"
-                  width="100"
-                  height="100"
-                  fill="rgba(59, 130, 246, 0.05)"
-                  clipPath="url(#hitmapPolygonClip)"
-                />
-              </Svg>
+          {!isUpcoming && (
+            <View className="absolute top-0 left-0 w-full h-full flex items-center justify-center">
+              <View className="relative w-full h-full rounded-t-full flex items-center justify-center">
+                <Svg
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: [{ translateY: -65 }, { translateX: -50 }],
+                  }}
+                  viewBox="0 0 100 100"
+                  preserveAspectRatio="none"
+                >
+                  <Defs>
+                    <ClipPath id="hitmapPolygonClip">
+                      <Polygon points="0,0 0,61 100,35" />
+                    </ClipPath>
+                  </Defs>
+                  <Rect
+                    x="0"
+                    y="0"
+                    width="100"
+                    height="100"
+                    fill="rgba(59, 130, 246, 0.05)"
+                    clipPath="url(#hitmapPolygonClip)"
+                  />
+                </Svg>
+              </View>
             </View>
-          </View>
+          )}
 
           {/* background layer  */}
           <View className="absolute top-0 left-0 w-full h-full bg-gray-900/50" />
         </View>
       </View>
       {/* Heatmap Description */}
-      <View className="flex-row items-center justify-center" style={{ gap: 8 }}>
-        <Activity size={20} color={colors.blue} />
-        <Text className="text-lg text-gray-300">
-          Most active in central midfield area
-        </Text>
-      </View>
+      {isUpcoming ? (
+        <View
+          className="flex-row items-center justify-center"
+          style={{ gap: 8 }}
+        >
+          <Activity size={20} color={colors.blue} />
+          <Text className="text-lg text-gray-300">
+            Will be updated after the match.
+          </Text>
+        </View>
+      ) : (
+        <View
+          className="flex-row items-center justify-center"
+          style={{ gap: 8 }}
+        >
+          <Activity size={20} color={colors.blue} />
+          <Text className="text-lg text-gray-300">
+            Most active in central midfield area
+          </Text>
+        </View>
+      )}
     </View>
   );
 };

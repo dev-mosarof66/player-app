@@ -1,9 +1,7 @@
-import { matchType } from "@/app/matches";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { matchType } from "@/app/(tabs)/matches";
 import { Calendar, Star } from "lucide-react-native";
 import { Text, TouchableOpacity, View } from "react-native";
-import { RootStackParamList } from "@/app/_layout";
+import { useRouter } from "expo-router";
 
 const getStatusStyles = (color: string) => {
   const styles = {
@@ -16,15 +14,10 @@ const getStatusStyles = (color: string) => {
 };
 
 const MatchesTabContent = ({ matches }: { matches: matchType[] }) => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const router = useRouter();
 
   const handleMatchPress = (match: matchType) => {
-    if (match.type === "upcoming") {
-      navigation.navigate("MatchDetails", { matchId: match.id.toString() });
-    } else {
-      navigation.navigate("MatchAnalysis", { matchId: match.id.toString() });
-    }
+    router.push(`/match-analysis?matchId=${match.id}`);
   };
   return (
     <View className="px-4" style={{ gap: 16 }}>

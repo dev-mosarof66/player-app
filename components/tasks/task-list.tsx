@@ -1,7 +1,8 @@
+import { taskType } from "@/app/(tabs)/tasks";
+import { scaleSpacing } from "@/utils/responsive";
 import React from "react";
 import { View } from "react-native";
 import TaskCard from "./task-card";
-import { taskType } from "@/app/(tabs)/tasks";
 
 const TaskList = ({
   selectedTask,
@@ -11,7 +12,14 @@ const TaskList = ({
   onTaskPress: (task: taskType) => void;
 }) => {
   return (
-    <View className="flex-1 px-4" style={{ gap: 12 }}>
+    <View
+      className="flex-1"
+      style={{
+        gap: scaleSpacing(14),
+        paddingBottom: scaleSpacing(20),
+        paddingHorizontal: scaleSpacing(10),
+      }}
+    >
       {selectedTask.map((task) => (
         <TaskCard key={task.id} task={task} onPress={onTaskPress} />
       ))}

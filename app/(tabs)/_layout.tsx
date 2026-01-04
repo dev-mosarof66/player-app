@@ -11,7 +11,7 @@ export default function TabLayout() {
         tabBarActiveTintColor: colors.blue,
         headerShown: false,
         tabBarLabelStyle: {
-          fontSize: scaleFontSize(14),
+          fontSize: scaleFontSize(12),
         },
       }}
     >

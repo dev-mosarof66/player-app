@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react-native";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 
-const Header = () => {
+const Header = ({ isUpcoming }: { isUpcoming: boolean }) => {
   const router = useRouter();
   return (
     <View
@@ -17,7 +17,9 @@ const Header = () => {
       >
         <ArrowLeft color={colors.blue} size={20} />
       </TouchableOpacity>
-      <Text className="text-2xl font-bold text-gray-300">Match Analysis</Text>
+      <Text className="text-2xl font-bold text-gray-300">
+        {isUpcoming ? "Upcoming Match" : "Match Analysis"}
+      </Text>
     </View>
   );
 };

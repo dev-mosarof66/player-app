@@ -1,4 +1,4 @@
-import { taskType } from "@/app/tasks";
+import { taskType } from "@/app/(tabs)/tasks";
 import { colors } from "@/constants/color-config";
 import { scaleFontSize, scaleSpacing } from "@/utils/responsive";
 import { ChevronRight } from "lucide-react-native";
@@ -23,16 +23,16 @@ const TaskCard = ({
       >
         <View className="flex-row items-center justify-between">
           {/* Title */}
-          <Text className="font-medium text-gray-200" style={{ fontSize: scaleFontSize(20) }}>
+          <Text className="font-medium text-gray-200" style={{ fontSize: scaleFontSize(18) }}>
             {task.title || "Untitled Task"}
           </Text>
 
           {/* Status */}
           <View className="flex-row items-center" style={{ gap: scaleSpacing(4) }}>
             <View
-              className={`px-2 py-0.5 rounded-lg ${getBatchColor(task.status)}`}
+              className={`px-2 py-0.5 rounded-md ${getBatchColor(task.status)}`}
             >
-              <Text className="text-gray-200" style={{ fontSize: scaleFontSize(12) }}>
+              <Text className="text-gray-200" style={{ fontSize: scaleFontSize(11) }}>
                 {task.status}
               </Text>
             </View>
@@ -45,7 +45,7 @@ const TaskCard = ({
             {task.categories.map((category: string) => (
               <View
                 key={category}
-                className="flex-row items-center px-2 py-0.5 rounded-lg bg-gray-700"
+                className="flex-row items-center px-2 py-0.5 rounded-md bg-gray-700"
                 style={{ gap: scaleSpacing(4) }}
               >
                 <Text
@@ -61,7 +61,7 @@ const TaskCard = ({
         )}
         {/* due date  */}
         {task.dueDate && (
-          <Text className="text-gray-300" style={{ fontSize: scaleFontSize(15) }}>
+          <Text className="text-gray-300" style={{ fontSize: scaleFontSize(14) }}>
             Due: {task.dueDate}
           </Text>
         )}

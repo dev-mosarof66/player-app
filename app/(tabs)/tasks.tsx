@@ -1,10 +1,11 @@
-import TaskModal from "@/components/tasks/task-modal";
-import Header from "@/components/tasks/header";
+import BgWrapper from "@/components/bg-wrapper";
+import Header from "@/components/header";
+import Tabs from "@/components/tasks/tabs";
 import TaskList from "@/components/tasks/task-list";
-import { colors } from "@/constants/color-config";
+import TaskModal from "@/components/tasks/task-modal";
+import { scaleSpacing } from "@/utils/responsive";
 import React, { useState } from "react";
-import { ScrollView } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { ScrollView, View } from "react-native";
 
 export type taskType = {
   id: number;
@@ -116,15 +117,17 @@ const TasksScreen = () => {
   };
 
   return (
-    <SafeAreaView
-      className="flex flex-col flex-1"
-      style={{ backgroundColor: colors.darkGray }}
-    >
-      <Header handleTab={handleTab} activeTab={activeTab} />
-
+    <BgWrapper>
+      <View>
+        <Header title="Tasks" />
+        <Tabs
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          handleTab={handleTab}
+        />
+      </View>
       <ScrollView
-        className="flex-1"
-        contentContainerStyle={{ paddingTop: 20 }}
+        style={{ paddingTop: scaleSpacing(20) }}
         showsVerticalScrollIndicator={false}
       >
         <TaskList selectedTask={taskList} onTaskPress={handleSelectTask} />
@@ -135,7 +138,7 @@ const TasksScreen = () => {
         onClose={() => setModalVisible(false)}
         task={selectedTask}
       />
-    </SafeAreaView>
+    </BgWrapper>
   );
 };
 

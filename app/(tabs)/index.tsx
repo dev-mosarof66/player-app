@@ -1,31 +1,47 @@
-import { StyleSheet } from 'react-native';
+import Header from "@/components/home/header";
+import QuickOverview from "@/components/home/quick-overview";
+import RunningTasks from "@/components/home/running-tasks";
+import UpcomingMatches from "@/components/home/upcoming-matches";
+import PerformanceSummary from "@/components/home/performance-summary";
+import BgWrapper from "@/components/bg-wrapper";
+import React, { useState } from "react";
+import { ScrollView, View } from "react-native";
+import TaskModal from "@/components/tasks/task-modal";
+import { taskType } from "./tasks";
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
+//placeholder image
+const profileImage = require("@/public/profile-image.jpeg");
 
-export default function TabOneScreen() {
+const HomeScreen = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedTask, setSelectedTask] = useState<taskType | null>(null);
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
-    </View>
-  );
-}
+    <BgWrapper>
+      <Header image={profileImage} />
+      <ScrollView
+        style={{
+          paddingTop: 20,
+        }}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={{ gap: 20 }}>
+          <QuickOverview />
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
-});
+          <RunningTasks setSelectedTask={setSelectedTask} setModalVisible={setModalVisible} />
+
+          <UpcomingMatches />
+
+          <PerformanceSummary />
+        </View>
+
+        <TaskModal
+          visible={modalVisible}
+          onClose={() => setModalVisible(false)}
+          task={selectedTask}
+        />
+      </ScrollView>
+    </BgWrapper>
+  );
+};
+
+export default HomeScreen;
